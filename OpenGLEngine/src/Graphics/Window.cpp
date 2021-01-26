@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window() : window(nullptr), context(nullptr)
+Window::Window() : window(nullptr), context(nullptr), width(800), height(600)
 {
 
 }
@@ -14,7 +14,7 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		std::cout << "Failed to initialize SDL" << std::endl;
+		Debug::FatalError("Engine Has Failed To Initialize SDL", "Window.cpp", __LINE__);
 		return false;
 	}
 
@@ -27,7 +27,8 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 
 	if (!window)
 	{
-		std::cout << "Failed to create window" << std::endl;
+		Debug::FatalError("Engine Has Failed To Create A Window", "Window.cpp", __LINE__);
+
 		return false;
 	}
 
@@ -38,12 +39,13 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 
 	if (err != GLEW_OK)
 	{
-		std::cout << "Failed to initialize GLEW" << std::endl;
+		Debug::FatalError("Engine Has Failed To Initialize GLEW", "Window.cpp", __LINE__);
 		return false;
 	}
 
 	glEnable(GL_DEPTH_TEST);
-	std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
+	Debug::Info("OpenGL Version: " + std::to_string(GL_VERSION), "Window.cpp", __LINE__);
 	return true;
 }
 

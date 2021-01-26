@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,15 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Tools\Debug.cpp" />
     <ClCompile Include="src\Core\CoreEngine.cpp" />
     <ClCompile Include="src\Graphics\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Core\Timer.cpp" />
+    <ClCompile Include="Game\TestGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Tools\GameInterface.h" />
+    <ClInclude Include="src\Tools\Debug.h" />
     <ClInclude Include="src\Core\CoreEngine.h" />
     <ClInclude Include="src\Graphics\Window.h" />
     <ClInclude Include="src\Core\Timer.h" />
+    <ClInclude Include="Game\TestGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

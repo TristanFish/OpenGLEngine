@@ -2,6 +2,8 @@
 #define COREENGINE_H
 
 #include "Graphics/Window.h"
+#include "Tools/Debug.h"
+#include "Tools/GameInterface.h"
 #include "Timer.h"
 #include <memory>
 
@@ -34,6 +36,8 @@ public:
 	/*!Returns the isRunning variable*/
 	bool GetIsRunning();
 
+	void SetGameInterface(GameInterface* gameInterface_);
+
 private:
 
 	//!CoreEngine Constructor
@@ -65,15 +69,23 @@ private:
 	friend std::default_delete<CoreEngine>;
 
 	//!Window Pointer
-	/*!A new Window object*/
+	/*!A new Window object that we use for our CoreEngine loop*/
 	Window* window;
 
 	//!isRunning boolean
 	/*!Stores whether the engine is running or not*/
 	bool isRunning;
 
+	//!Timer Instance
+	/*!The timer that our engine runs off of*/
 	Timer timer;
 
+	//!Frame's Per Second
+	/*!The FPS we want our engine to run at*/
 	unsigned int fps;
+
+	//!GameInterface Pointer
+	/*!*/
+	GameInterface* gameInterface;
 };
 #endif

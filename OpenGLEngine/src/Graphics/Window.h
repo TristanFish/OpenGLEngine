@@ -6,6 +6,7 @@
 #include <SDL_opengl.h>
 #include <string>
 #include <iostream>
+#include "Tools/Debug.h"
 
 //! Window Class
 /*!Control's the SDL/OpenGL window that our engine uses*/
