@@ -2,6 +2,7 @@
 #define COREENGINE_H
 
 #include "Graphics/Window.h"
+#include "Timer.h"
 #include <memory>
 
 //! CoreEngine Class
@@ -70,5 +71,9 @@ private:
 	//!isRunning boolean
 	/*!Stores whether the engine is running or not*/
 	bool isRunning;
+
+	Timer timer;
+
+	unsigned int fps;
 };
 #endif

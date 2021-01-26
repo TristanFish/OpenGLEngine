@@ -2,7 +2,7 @@
 
 std::unique_ptr<CoreEngine> CoreEngine::instance = nullptr;
 
-CoreEngine::CoreEngine() : window(nullptr), isRunning(false)
+CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(60)
 {
 
 }
@@ -30,6 +30,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		OnDestroy();
 		return isRunning = false;
 	}
+	timer.Start();
 	return isRunning = true;
 }
 
@@ -37,8 +38,10 @@ void CoreEngine::Run()
 {
 	while (isRunning)
 	{
-		Update(0.016f);
+		timer.UpdateFrameTricks();
+		Update(timer.GetDeltaTime());
 		Render();
+		SDL_Delay(timer.GetSleepTime(fps));
 	}
 
 	OnDestroy();
