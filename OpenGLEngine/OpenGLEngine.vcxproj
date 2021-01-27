@@ -19,20 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Scenes\GameScene.cpp" />
     <ClCompile Include="src\Tools\Debug.cpp" />
     <ClCompile Include="src\Core\CoreEngine.cpp" />
     <ClCompile Include="src\Graphics\Window.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Core\Timer.cpp" />
     <ClCompile Include="Game\TestGame.cpp" />
+    <ClCompile Include="Game\Scenes\StartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Scenes\GameScene.h" />
+    <ClInclude Include="src\Core\Scene.h" />
     <ClInclude Include="src\Tools\GameInterface.h" />
     <ClInclude Include="src\Tools\Debug.h" />
     <ClInclude Include="src\Core\CoreEngine.h" />
     <ClInclude Include="src\Graphics\Window.h" />
     <ClInclude Include="src\Core\Timer.h" />
     <ClInclude Include="Game\TestGame.h" />
+    <ClInclude Include="Game\Scenes\StartScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

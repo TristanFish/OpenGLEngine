@@ -5,6 +5,7 @@
 #include "Tools/Debug.h"
 #include "Tools/GameInterface.h"
 #include "Timer.h"
+#include "Scene.h"
 #include <memory>
 
 //! CoreEngine Class
@@ -32,11 +33,24 @@ public:
 	/*!Calls the Engines essential functions*/
 	void Run();
 
+	//!Exit Function
+	/*!*/
+	void Exit();
+
 	//!GetIsRunning Getter
 	/*!Returns the isRunning variable*/
-	bool GetIsRunning();
+	bool GetIsRunning() const;
+
+	//!GetCurrentScene Getter
+	/*!*/
+	int GetCurrentScene() const;
 
 	void SetGameInterface(GameInterface* gameInterface_);
+
+	//!SetCurrentScene Function
+	/*!*/
+	void SetCurrentScene(unsigned int sceneNum_);
+
 
 private:
 
@@ -87,5 +101,7 @@ private:
 	//!GameInterface Pointer
 	/*!*/
 	GameInterface* gameInterface;
+
+	unsigned int currentSceneNum;
 };
 #endif

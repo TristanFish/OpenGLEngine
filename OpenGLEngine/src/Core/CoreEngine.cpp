@@ -2,7 +2,8 @@
 
 std::unique_ptr<CoreEngine> CoreEngine::instance = nullptr;
 
-CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(60), gameInterface(nullptr)
+CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(60), 
+gameInterface(nullptr), currentSceneNum(0)
 {
 
 }
@@ -61,9 +62,19 @@ void CoreEngine::Run()
 	OnDestroy();
 }
 
-bool CoreEngine::GetIsRunning()
+void CoreEngine::Exit()
+{
+	isRunning = false;
+}
+
+bool CoreEngine::GetIsRunning() const
 {
 	return isRunning;
+}
+
+int CoreEngine::GetCurrentScene() const
+{
+	return currentSceneNum;
 }
 
 void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
@@ -71,12 +82,17 @@ void CoreEngine::SetGameInterface(GameInterface* gameInterface_)
 	gameInterface = gameInterface_;
 }
 
+void CoreEngine::SetCurrentScene(unsigned int sceneNum_)
+{
+	currentSceneNum = sceneNum_;
+}
+
 void CoreEngine::Update(const float deltatime_)
 {
 	if (gameInterface)
 	{
 		gameInterface->Update(deltatime_);
-		Debug::Trace("DeltaTime: " + std::to_string(deltatime_), "CoreEngine.cpp", __LINE__);
+		//Debug::Trace("DeltaTime: " + std::to_string(deltatime_), "CoreEngine.cpp", __LINE__);
 
 	}
 }
@@ -102,5 +118,4 @@ void CoreEngine::OnDestroy()
 	window = nullptr;
 	SDL_Quit();
 	exit(0);
-	
 }
