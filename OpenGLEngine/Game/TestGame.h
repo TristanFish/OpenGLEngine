@@ -7,6 +7,13 @@
 class TestGame : public GameInterface
 {
 public:
+
+	enum class GameScenes : unsigned int {
+		StartScene = 0,
+		GameScene
+	};
+
+
 	TestGame();
 
 	virtual ~TestGame();
@@ -16,7 +23,7 @@ public:
 	void Render() override;
 
 private:
-	int currentSceneNum;
+	GameScenes currentSceneName;
 	Scene* currentScene;
 	void BuildScene();
 

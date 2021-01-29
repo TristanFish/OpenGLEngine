@@ -1,6 +1,6 @@
 #include "TestGame.h"
 
-TestGame::TestGame() : GameInterface(), currentSceneNum(0), currentScene(nullptr)
+TestGame::TestGame() : GameInterface(), currentSceneName(GameScenes::StartScene), currentScene(nullptr)
 {
 
 }
@@ -15,7 +15,7 @@ bool TestGame::OnCreate()
 	if (CoreEngine::GetInstance()->GetCurrentScene() == 0)
 	{
 		currentScene = new StartScene();
-		currentSceneNum = 0;
+		currentSceneName = GameScenes::StartScene;
 		return currentScene->OnCreate();
 	}
 	Debug::Error("Engine's scene is not initialized to 0", "TestGame.cpp", __LINE__);
@@ -24,7 +24,7 @@ bool TestGame::OnCreate()
 
 void TestGame::Update(const float deltaTime_)
 {
-	if (currentSceneNum != CoreEngine::GetInstance()->GetCurrentScene())
+	if (currentSceneName != static_cast<GameScenes>(CoreEngine::GetInstance()->GetCurrentScene()))
 	{
 		BuildScene();
 	}
@@ -52,7 +52,7 @@ void TestGame::BuildScene()
 		break;
 	}
 
-	currentSceneNum = CoreEngine::GetInstance()->GetCurrentScene();
+	currentSceneName = static_cast<GameScenes>(CoreEngine::GetInstance()->GetCurrentScene());
 
 	if (!currentScene->OnCreate())
 	{
