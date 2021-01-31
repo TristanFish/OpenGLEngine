@@ -18,7 +18,7 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
-
+	Debug::Trace("DeltaTime: " + std::to_string(deltaTime_), "CoreEngine.cpp", __LINE__);
 }
 
 void GameScene::Render()

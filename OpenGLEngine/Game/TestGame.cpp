@@ -41,9 +41,11 @@ void TestGame::BuildScene()
 	delete currentScene;
 	currentScene = nullptr;
 
-	switch (CoreEngine::GetInstance()->GetCurrentScene())
+	currentSceneName = static_cast<GameScenes>(CoreEngine::GetInstance()->GetCurrentScene());
+
+	switch (currentSceneName)
 	{
-	case 1:
+	case GameScenes::GameScene:
 		currentScene = new GameScene();
 		break;
 
@@ -52,7 +54,6 @@ void TestGame::BuildScene()
 		break;
 	}
 
-	currentSceneName = static_cast<GameScenes>(CoreEngine::GetInstance()->GetCurrentScene());
 
 	if (!currentScene->OnCreate())
 	{

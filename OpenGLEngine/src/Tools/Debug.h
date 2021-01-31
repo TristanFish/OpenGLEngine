@@ -65,7 +65,7 @@ private:
 	static void Log(const MessageType type_, const std::string message_, const std::string& fileName_, const int line_);
 
 	//!Static Current Severity
-	/*!*/
+	/*!Currently severity*/
 	static MessageType currentSev;
 
 	//!Static string outputName

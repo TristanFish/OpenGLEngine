@@ -42,13 +42,15 @@ public:
 	bool GetIsRunning() const;
 
 	//!GetCurrentScene Getter
-	/*!*/
+	/*!Return's the current scene number*/
 	int GetCurrentScene() const;
 
+	//!SetGameInterface Setter
+	/*!Sets our gameInterface pointer*/
 	void SetGameInterface(GameInterface* gameInterface_);
 
 	//!SetCurrentScene Function
-	/*!*/
+	/*!Set's the current scene*/
 	void SetCurrentScene(unsigned int sceneNum_);
 
 
@@ -99,9 +101,11 @@ private:
 	unsigned int fps;
 
 	//!GameInterface Pointer
-	/*!*/
+	/*!Used to link the game too th engine*/
 	GameInterface* gameInterface;
 
+	//!unsigned int currentSceneNum
+	/*!The scene number that our engine is currently on*/
 	unsigned int currentSceneNum;
 };
 #endif
