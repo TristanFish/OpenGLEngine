@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\3D\Model.cpp" />
+    <ClCompile Include="src\Graphics\3D\Mesh.cpp" />
+    <ClCompile Include="src\Graphics\3D\GameObject.cpp" />
     <ClCompile Include="Game\Scenes\GameScene.cpp" />
     <ClCompile Include="src\Tools\Debug.cpp" />
     <ClCompile Include="src\Core\CoreEngine.cpp" />
@@ -29,6 +32,9 @@
     <ClCompile Include="Game\Scenes\StartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Graphics\3D\Model.h" />
+    <ClInclude Include="src\Graphics\3D\Mesh.h" />
+    <ClInclude Include="src\Graphics\3D\GameObject.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />
     <ClInclude Include="src\Core\Scene.h" />
     <ClInclude Include="src\Tools\GameInterface.h" />

@@ -29,6 +29,16 @@ public:
 	/*!Overrides the Scene Render and renders our current scene*/
 	void Render() override;
 
+private:
+
+	Mesh* InitilizeSquareMesh(const float size_);
+
+	Mesh* InitilizeTriangleMesh(const float size_);
+
+
+	void InitilizeModel();
+
+	GameObject* square;
 };
 
 #endif

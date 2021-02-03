@@ -1,27 +1,83 @@
 #include "GameScene.h"
 
-GameScene::GameScene()
+GameScene::GameScene() : square(nullptr)
 {
 
 }
 
 GameScene::~GameScene()
 {
-
+	delete square;
+	square = nullptr;
 }
 
 bool GameScene::OnCreate()
 {
 	Debug::Info("Game Scene Has Been Created", "GameScene.cpp", __LINE__);
+
+	
+	InitilizeModel();
 	return true;
 }
 
 void GameScene::Update(const float deltaTime_)
 {
-	Debug::Trace("DeltaTime: " + std::to_string(deltaTime_), "CoreEngine.cpp", __LINE__);
 }
 
 void GameScene::Render()
 {
+	square->Render();
+}
 
+Mesh* GameScene::InitilizeSquareMesh(const float size_)
+{
+	Vertex vert;
+	std::vector<Vertex> vertexList;
+	vertexList.reserve(6);
+	vert.position = glm::vec3(-size_, size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(-size_, -size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(0.0f, -size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(-size_, size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(0.0f, size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(0.0f, -size_, 0.0f);
+	vertexList.push_back(vert);
+
+	return new Mesh(vertexList);
+}
+
+Mesh* GameScene::InitilizeTriangleMesh(const float size_)
+{
+	Vertex vert;
+	std::vector<Vertex> vertexList;
+	vertexList.reserve(6);
+	vert.position = glm::vec3(0.0f, size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(-size_, -size_, 0.0f);
+	vertexList.push_back(vert);
+
+	vert.position = glm::vec3(size_, -size_, 0.0f);
+	vertexList.push_back(vert);
+
+	return new Mesh(vertexList);
+}
+
+void GameScene::InitilizeModel()
+{
+	Mesh* Square = InitilizeSquareMesh(0.25f);
+
+
+	Model* model = new Model();
+	model->AddMesh(Square);
+	square = new GameObject(model);
 }

@@ -6,6 +6,7 @@
 #include "Tools/GameInterface.h"
 #include "Timer.h"
 #include "Scene.h"
+#include "Graphics/3D/GameObject.h"
 #include <memory>
 
 //! CoreEngine Class
