@@ -3,7 +3,7 @@
 std::unique_ptr<CoreEngine> CoreEngine::instance = nullptr;
 
 CoreEngine::CoreEngine() : window(nullptr), isRunning(false), fps(60), 
-gameInterface(nullptr), currentSceneNum(0)
+gameInterface(nullptr), timer(nullptr), currentSceneNum(0)
 {
 
 }
@@ -45,7 +45,8 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 
 
 	Debug::Info("Engine Has Been Successfully Created ", "CoreEngine.cpp", __LINE__);
-	timer.Start();
+	timer = new Timer();
+	timer->Start();
 	return isRunning = true;
 }
 
@@ -53,10 +54,10 @@ void CoreEngine::Run()
 {
 	while (isRunning)
 	{
-		timer.UpdateFrameTricks();
-		Update(timer.GetDeltaTime());
+		timer->UpdateFrameTricks();
+		Update(timer->GetDeltaTime());
 		Render();
-		SDL_Delay(timer.GetSleepTime(fps));
+		SDL_Delay(timer->GetSleepTime(fps));
 	}
 
 	OnDestroy();
@@ -111,6 +112,8 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	delete timer;
+	timer = nullptr;
 	delete gameInterface;
 	gameInterface = nullptr;
 

@@ -95,7 +95,7 @@ private:
 
 	//!Timer Instance
 	/*!The timer that our engine runs off of*/
-	Timer timer;
+	Timer* timer;
 
 	//!Frame's Per Second
 	/*!The FPS we want our engine to run at*/
