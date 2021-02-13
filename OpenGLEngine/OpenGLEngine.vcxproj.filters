@@ -48,6 +48,9 @@
     <ClCompile Include="src\Graphics\3D\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Graphics\ShaderHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\CoreEngine.h">
@@ -86,5 +89,12 @@
     <ClInclude Include="src\Graphics\3D\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Graphics\ShaderHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Graphics\Shaders\ColourVertShader.glsl" />
+    <None Include="src\Graphics\Shaders\ColourFragShader.glsl" />
   </ItemGroup>
 </Project>

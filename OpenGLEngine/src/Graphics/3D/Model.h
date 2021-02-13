@@ -10,7 +10,7 @@ class Model
 public:
 	//! Model Constructor
 	/*!Initializes class specific variables*/
-	Model();
+	Model(GLuint shaderProgram_);
 
 	//! Model Destructor
 	/*!Loops through the meshes vector and deletes all the pointers*/
@@ -29,5 +29,7 @@ private:
 	//! std::vector meshes
 	/*!Holds all of the meshes that this model contains*/
 	std::vector<Mesh*> meshes;
+
+	GLuint shaderProgram;
 };
 #endif

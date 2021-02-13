@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="src\Graphics\3D\Model.cpp" />
     <ClCompile Include="src\Graphics\3D\Mesh.cpp" />
     <ClCompile Include="src\Graphics\3D\GameObject.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="Game\Scenes\StartScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Graphics\ShaderHandler.h" />
     <ClInclude Include="src\Graphics\3D\Model.h" />
     <ClInclude Include="src\Graphics\3D\Mesh.h" />
     <ClInclude Include="src\Graphics\3D\GameObject.h" />
@@ -44,6 +46,10 @@
     <ClInclude Include="src\Core\Timer.h" />
     <ClInclude Include="Game\TestGame.h" />
     <ClInclude Include="Game\Scenes\StartScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Graphics\Shaders\ColourFragShader.glsl" />
+    <None Include="src\Graphics\Shaders\ColourVertShader.glsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

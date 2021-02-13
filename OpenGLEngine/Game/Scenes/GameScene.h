@@ -31,13 +31,20 @@ public:
 
 private:
 
+	//!InitilizeSquareMesh Function
+	/*!Creates a list of vertices for a square and then returns the vertices as a mesh*/
 	Mesh* InitilizeSquareMesh(const float size_);
 
+	//!InitilizeTriangleMesh Function
+	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
 	Mesh* InitilizeTriangleMesh(const float size_);
 
-
+	//!InitilizeModel Function
+	/*!Initializes the model that the square GameObject will use*/
 	void InitilizeModel();
 
+	//!Square GameObject pointer
+	/*!*/
 	GameObject* square;
 };
 

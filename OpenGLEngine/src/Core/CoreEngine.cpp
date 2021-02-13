@@ -33,6 +33,10 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		return isRunning = false;
 	}
 
+	ShaderHandler::GetInstance()->CreateProgram("colourShader", 
+		"src/Graphics/Shaders/ColourVertShader.glsl", 
+		"src/Graphics/Shaders/ColourFragShader.glsl");
+
 	if (gameInterface)
 	{
 		if (!gameInterface->OnCreate())
@@ -112,6 +116,8 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	ShaderHandler::GetInstance()->OnDestroy();
+
 	delete timer;
 	timer = nullptr;
 	delete gameInterface;
