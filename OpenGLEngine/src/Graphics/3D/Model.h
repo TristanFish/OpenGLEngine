@@ -30,6 +30,8 @@ private:
 	/*!Holds all of the meshes that this model contains*/
 	std::vector<Mesh*> meshes;
 
+	//! Shader Program Unsigned Integer
+	/*!Contains the shader that this model uses*/
 	GLuint shaderProgram;
 };
 #endif
