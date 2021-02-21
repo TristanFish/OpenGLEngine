@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Graphics/3D/GameObject.h"
 #include "Graphics/ShaderHandler.h"
+#include "Camera.h"
 #include <memory>
 
 //! CoreEngine Class
@@ -47,6 +48,12 @@ public:
 	/*!Return's the current scene number*/
 	int GetCurrentScene() const;
 
+	float GetScreenWidth() const;
+
+	float GetScreenHeight() const;
+
+	Camera* GetCamera() const;
+
 	//!SetGameInterface Setter
 	/*!Sets our gameInterface pointer*/
 	void SetGameInterface(GameInterface* gameInterface_);
@@ -55,6 +62,7 @@ public:
 	/*!Set's the current scene*/
 	void SetCurrentScene(unsigned int sceneNum_);
 
+	void SetCamera(Camera* camera_);
 
 private:
 
@@ -109,5 +117,7 @@ private:
 	//!unsigned int currentSceneNum
 	/*!The scene number that our engine is currently on*/
 	unsigned int currentSceneNum;
+
+	Camera* camera;
 };
 #endif

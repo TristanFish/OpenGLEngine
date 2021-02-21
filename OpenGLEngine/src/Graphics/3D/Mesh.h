@@ -5,6 +5,9 @@
 #include <glew.h>
 #include <vector>
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "Core/Camera.h"
 
 //!Vertex Struct
 /*!Hold's all the information that a vertex needs */
@@ -26,7 +29,7 @@ class Mesh
 public:
 	//! Mesh Constructor
 	/*!Initializes the class specific variables*/
-	Mesh(std::vector<Vertex>& vertexList_);
+	Mesh(std::vector<Vertex>& vertexList_, GLuint shaderProgram_);
 
 	//! Mesh Destructor
 	/*!Deletes buffers and clears the vertexList*/
@@ -34,7 +37,7 @@ public:
 
 	//!Render Function
 	/*!Binds the vertex buffer and draws the vertices's*/
-	void Render();
+	void Render(Camera* camera_,glm::mat4 transform_);
 
 private:
 
@@ -49,6 +52,14 @@ private:
 	//!Vector of vertices's
 	/*!Stores all the vertices's in our Mesh*/
 	std::vector<Vertex> vertexList;
+
+	//!GLuint Shader Program
+	/*!Stores the shader program that this mesh is using*/
+	GLuint shaderProgram;
+
+	//!GLuint Model, Vie, Projection Locations
+	/*!Stores the locations of our different matricies needed to render this mesh*/
+	GLuint modelLoc, viewLoc, projectionLoc;
 
 };
 

@@ -18,7 +18,7 @@ public:
 
 	//!Render Function
 	/*!Renders the gameobjects mesh*/
-	void Render();
+	void Render(Camera* camera_);
 
 private:
 

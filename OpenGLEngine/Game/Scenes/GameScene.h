@@ -2,6 +2,7 @@
 #define GAMESCENE_H
 
 #include "Core/CoreEngine.h"
+#include <memory>
 
 //!GameScene Class
 /*!Control's our game scene and inheritress from Scene*/
@@ -39,13 +40,21 @@ private:
 	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
 	Mesh* InitilizeTriangleMesh(const float size_);
 
+	//!InitilizeTriangleMesh Function
+	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
+	Mesh* InitilizeBoxMesh();
+
 	//!InitilizeModel Function
 	/*!Initializes the model that the square GameObject will use*/
 	void InitilizeModel();
 
 	//!Square GameObject pointer
-	/*!*/
+	/*!Handle's how the square gameobject will be rendered*/
 	GameObject* square;
+
+	//!Model pointer
+	/*!*/
+	Model* model;
 };
 
 #endif
