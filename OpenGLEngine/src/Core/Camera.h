@@ -3,7 +3,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
+#include "Graphics/FX/LightSource.h"
+#include <vector>
 
 //!Camera Class
 /*!Control's how our camera works in our engine*/
@@ -43,6 +44,14 @@ public:
 	/*!Returns the camera's position vector*/
 	glm::vec3 GetPosition() const;
 
+	//!AddLightSource Function 
+	/*!Add's a new light source to the vector of light sources*/
+	void AddLightSource(LightSource* lightSource_);
+
+	//!GetLightSources Getter 
+	/*!Returns a vector of light sources in our scene*/
+	std::vector<LightSource*> GetLightSources() const;
+
 private:
 
 	//!UpdateCameraVectors Function
@@ -72,6 +81,11 @@ private:
 	//!Directional vector3's
 	/*!Stores all of the camera's directional vectors*/
 	glm::vec3 forward, up, right, worldUp;
+
+
+	//!Vector lightSources 
+	/*!Holds a list of light sources in our scene*/
+	std::vector<LightSource*> lightSources;
 
 
 };

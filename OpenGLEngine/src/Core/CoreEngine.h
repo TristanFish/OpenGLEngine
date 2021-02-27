@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Graphics/3D/GameObject.h"
 #include "Graphics/ShaderHandler.h"
+#include "Graphics/TextureHandler.h"
 #include "Camera.h"
 #include <memory>
 
@@ -45,13 +46,19 @@ public:
 	bool GetIsRunning() const;
 
 	//!GetCurrentScene Getter
-	/*!Return's the current scene number*/
+	/*!Returns the current scene number*/
 	int GetCurrentScene() const;
 
+	//!GetScreenWidth Getter
+	/*!Returns the screens width*/
 	float GetScreenWidth() const;
 
+	//!GetScreenHeight Getter
+	/*!Returns the screens height*/
 	float GetScreenHeight() const;
 
+	//!GetCamera Getter
+	/*!Returns a pointer to our camera*/
 	Camera* GetCamera() const;
 
 	//!SetGameInterface Setter
@@ -62,6 +69,8 @@ public:
 	/*!Set's the current scene*/
 	void SetCurrentScene(unsigned int sceneNum_);
 
+	//!GetCamera Setter
+	/*!Set's the camera to the Camera* parameter*/
 	void SetCamera(Camera* camera_);
 
 private:

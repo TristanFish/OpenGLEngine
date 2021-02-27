@@ -6,8 +6,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include "Core/Camera.h"
+class CoreEngine;
 
 //!Vertex Struct
 /*!Hold's all the information that a vertex needs */
@@ -29,7 +29,7 @@ class Mesh
 public:
 	//! Mesh Constructor
 	/*!Initializes the class specific variables*/
-	Mesh(std::vector<Vertex>& vertexList_, GLuint shaderProgram_);
+	Mesh(std::vector<Vertex>& vertexList_,GLuint textureID_, GLuint shaderProgram_);
 
 	//! Mesh Destructor
 	/*!Deletes buffers and clears the vertexList*/
@@ -40,6 +40,7 @@ public:
 	void Render(Camera* camera_,glm::mat4 transform_);
 
 private:
+
 
 	//!GenerateBuffers Function
 	/*!Generates the buffers that are needed to render the vertices's*/
@@ -57,10 +58,18 @@ private:
 	/*!Stores the shader program that this mesh is using*/
 	GLuint shaderProgram;
 
+	//!GLuint textureID
+	/*!Stores the ID of the texture this mesh uses*/
+	GLuint textureID;
+
 	//!GLuint Model, Vie, Projection Locations
 	/*!Stores the locations of our different matricies needed to render this mesh*/
-	GLuint modelLoc, viewLoc, projectionLoc;
+	GLuint modelLoc, viewLoc, projectionLoc, textureLoc;
+	
 
+	//!GLuint Position, LightPosition, LightAmbient, LightSpecular, LightDiffuse and LightColour locations
+	/*!Stores all of the needed locations that allows us to incorporate lighting*/
+	GLuint posLoc, lightPosLoc, lightAmbLoc, lightSpecLoc, lightDiffLoc, lightColLoc;
 };
 
 #endif

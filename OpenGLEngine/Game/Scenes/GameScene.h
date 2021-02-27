@@ -34,15 +34,15 @@ private:
 
 	//!InitilizeSquareMesh Function
 	/*!Creates a list of vertices for a square and then returns the vertices as a mesh*/
-	Mesh* InitilizeSquareMesh(const float size_);
+	Mesh* InitilizeSquareMesh(const float size_, const GLuint textureID_, const GLuint shaderProgram_);
 
 	//!InitilizeTriangleMesh Function
 	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
-	Mesh* InitilizeTriangleMesh(const float size_);
+	Mesh* InitilizeTriangleMesh(const float size_, const GLuint textureID_, const GLuint shaderProgram_);
 
 	//!InitilizeTriangleMesh Function
 	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
-	Mesh* InitilizeBoxMesh();
+	Mesh* InitilizeCubeMesh(const GLuint textureID_, const GLuint shaderProgram_);
 
 	//!InitilizeModel Function
 	/*!Initializes the model that the square GameObject will use*/

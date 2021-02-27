@@ -51,6 +51,15 @@
     <ClCompile Include="src\Graphics\ShaderHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\TextureHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\FX\LightSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\CoreEngine.h">
@@ -92,9 +101,20 @@
     <ClInclude Include="src\Graphics\ShaderHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\TextureHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\FX\LightSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Graphics\Shaders\ColourVertShader.glsl" />
     <None Include="src\Graphics\Shaders\ColourFragShader.glsl" />
+    <None Include="src\Graphics\Shaders\FragShader.glsl" />
+    <None Include="src\Graphics\Shaders\VertShader.glsl" />
   </ItemGroup>
 </Project>

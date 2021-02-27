@@ -37,6 +37,10 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		"src/Graphics/Shaders/ColourVertShader.glsl", 
 		"src/Graphics/Shaders/ColourFragShader.glsl");
 
+	ShaderHandler::GetInstance()->CreateProgram("basicShader",
+		"src/Graphics/Shaders/VertShader.glsl",
+		"src/Graphics/Shaders/FragShader.glsl");
+
 	if (gameInterface)
 	{
 		if (!gameInterface->OnCreate())
@@ -136,6 +140,7 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	TextureHandler::GetInstance()->OnDestroy();
 	ShaderHandler::GetInstance()->OnDestroy();
 
 	delete timer;

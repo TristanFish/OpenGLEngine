@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\FX\LightSource.cpp" />
     <ClCompile Include="src\Core\Camera.cpp" />
     <ClCompile Include="src\Graphics\ShaderHandler.cpp" />
     <ClCompile Include="src\Graphics\3D\Model.cpp" />
@@ -32,8 +33,10 @@
     <ClCompile Include="src\Core\Timer.cpp" />
     <ClCompile Include="Game\TestGame.cpp" />
     <ClCompile Include="Game\Scenes\StartScene.cpp" />
+    <ClCompile Include="src\Graphics\TextureHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Graphics\FX\LightSource.h" />
     <ClInclude Include="src\Core\Camera.h" />
     <ClInclude Include="src\Graphics\ShaderHandler.h" />
     <ClInclude Include="src\Graphics\3D\Model.h" />
@@ -48,10 +51,13 @@
     <ClInclude Include="src\Core\Timer.h" />
     <ClInclude Include="Game\TestGame.h" />
     <ClInclude Include="Game\Scenes\StartScene.h" />
+    <ClInclude Include="src\Graphics\TextureHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Graphics\Shaders\ColourFragShader.glsl" />
     <None Include="src\Graphics\Shaders\ColourVertShader.glsl" />
+    <None Include="src\Graphics\Shaders\FragShader.glsl" />
+    <None Include="src\Graphics\Shaders\VertShader.glsl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
