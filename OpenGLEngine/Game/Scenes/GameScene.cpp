@@ -22,10 +22,10 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.1f, 0.5f, 0.5f));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-5.0f, 1.0f, 2.0f), glm::vec3(1.0f, 0.0f, 0.0f), 0.1f, 0.5f, 0.5f));
 
-	TextureHandler::GetInstance()->CreateTexture("Checkerboard", "./Resources/CheckerboardTexture.png");
 
-
-	InitilizeModel();
+	model = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
+	square = new GameObject(model);
+	
 
 	
 	return true;
@@ -33,8 +33,7 @@ bool GameScene::OnCreate()
 
 void GameScene::Update(const float deltaTime_)
 {
-	model->SetAngle(model->GetAngle() + 0.005);
-
+	square->Update(deltaTime_);
 }
 
 void GameScene::Render()
@@ -71,7 +70,11 @@ Mesh* GameScene::InitilizeSquareMesh(const float size_, const GLuint textureID_,
 	vert.colour = glm::vec3(0.0f, 0.0f, 1.0f);
 	vertexList.push_back(vert);
 
-	return new Mesh(vertexList, textureID_, shaderProgram_);
+	SubMesh subMesh;
+	subMesh.vertexList = vertexList;
+	subMesh.textureID = textureID_;
+
+	return new Mesh(subMesh, shaderProgram_);
 }
 
 Mesh* GameScene::InitilizeTriangleMesh(const float size_, const GLuint textureID_, const GLuint shaderProgram_)
@@ -91,7 +94,11 @@ Mesh* GameScene::InitilizeTriangleMesh(const float size_, const GLuint textureID
 	vert.colour = glm::vec3(1.0f, 0.0f, 0.0f);
 	vertexList.push_back(vert);
 
-	return new Mesh(vertexList, textureID_, shaderProgram_);
+	SubMesh subMesh;
+	subMesh.vertexList = vertexList;
+	subMesh.textureID = textureID_;
+
+	return new Mesh(subMesh, shaderProgram_);
 }
 
 Mesh* GameScene::InitilizeCubeMesh(const GLuint textureID_, const GLuint shaderProgram_)
@@ -316,7 +323,11 @@ Mesh* GameScene::InitilizeCubeMesh(const GLuint textureID_, const GLuint shaderP
 	v.colour = glm::vec3(0.982f, 0.099f, 0.879f);
 	vertexList.push_back(v);
 
-	return new Mesh(vertexList, textureID_,shaderProgram_);
+	SubMesh subMesh;
+	subMesh.vertexList = vertexList;
+	subMesh.textureID = textureID_;
+
+	return new Mesh(subMesh,shaderProgram_);
 }
 
 void GameScene::InitilizeModel()
@@ -324,7 +335,7 @@ void GameScene::InitilizeModel()
 	Mesh* Square = InitilizeCubeMesh(TextureHandler::GetInstance()->GetTexture("Checkerboard"), ShaderHandler::GetInstance()->GetShader("basicShader"));
 
 
-	model = new Model(ShaderHandler::GetInstance()->GetShader("basicShader"));
+	model = new Model("","",ShaderHandler::GetInstance()->GetShader("basicShader"));
 	model->AddMesh(Square);
 	//model->SetScale(glm::vec3(0.5));
 	square = new GameObject(model);

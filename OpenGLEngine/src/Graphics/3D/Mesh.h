@@ -21,6 +21,16 @@ struct Vertex
 };
 
 
+//!SubMesh Struct
+/*!Hold's a meshes basic information*/
+struct SubMesh {
+	std::vector<Vertex> vertexList;
+	std::vector<unsigned int> meshIndices;
+	GLuint textureID;
+
+};
+
+
 //! Mesh Class
 /*!Handles the functionality of Meshes in our engine*/
 class Mesh
@@ -29,7 +39,7 @@ class Mesh
 public:
 	//! Mesh Constructor
 	/*!Initializes the class specific variables*/
-	Mesh(std::vector<Vertex>& vertexList_,GLuint textureID_, GLuint shaderProgram_);
+	Mesh(SubMesh& subMesh_, GLuint shaderProgram_);
 
 	//! Mesh Destructor
 	/*!Deletes buffers and clears the vertexList*/
@@ -37,7 +47,7 @@ public:
 
 	//!Render Function
 	/*!Binds the vertex buffer and draws the vertices's*/
-	void Render(Camera* camera_,glm::mat4 transform_);
+	void Render(Camera* camera_,std::vector<glm::mat4>& instances_);
 
 private:
 
@@ -50,17 +60,14 @@ private:
 	/*!Holds the buffers needed to render the vertices on screen*/
 	GLuint VAO, VBO;
 
-	//!Vector of vertices's
-	/*!Stores all the vertices's in our Mesh*/
-	std::vector<Vertex> vertexList;
+	//!Submesh 
+	/*!Stores stores this meshes main vertex information*/
+	SubMesh subMesh;
 
 	//!GLuint Shader Program
 	/*!Stores the shader program that this mesh is using*/
 	GLuint shaderProgram;
 
-	//!GLuint textureID
-	/*!Stores the ID of the texture this mesh uses*/
-	GLuint textureID;
 
 	//!GLuint Model, Vie, Projection Locations
 	/*!Stores the locations of our different matricies needed to render this mesh*/
@@ -69,7 +76,7 @@ private:
 
 	//!GLuint Position, LightPosition, LightAmbient, LightSpecular, LightDiffuse and LightColour locations
 	/*!Stores all of the needed locations that allows us to incorporate lighting*/
-	GLuint posLoc, lightPosLoc, lightAmbLoc, lightSpecLoc, lightDiffLoc, lightColLoc;
+	GLuint posLoc, lightPosLoc, lightAmbLoc, lightSpecLoc, lightDiffLoc, lightColLoc, lightsInGameLoc;
 };
 
 #endif

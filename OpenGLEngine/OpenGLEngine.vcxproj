@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Graphics\OBJLoader.cpp" />
     <ClCompile Include="src\Graphics\FX\LightSource.cpp" />
     <ClCompile Include="src\Core\Camera.cpp" />
     <ClCompile Include="src\Graphics\ShaderHandler.cpp" />
@@ -36,6 +37,7 @@
     <ClCompile Include="src\Graphics\TextureHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Graphics\OBJLoader.h" />
     <ClInclude Include="src\Graphics\FX\LightSource.h" />
     <ClInclude Include="src\Core\Camera.h" />
     <ClInclude Include="src\Graphics\ShaderHandler.h" />

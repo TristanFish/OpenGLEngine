@@ -1,8 +1,9 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "Mesh.h"
+#include "Graphics/OBJLoader.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <string>
 
 //! Model Class
 /*!Handles how a Model will work in our engine*/
@@ -11,9 +12,7 @@ class Model
 public:
 	//! Model Constructor
 	/*!Initializes class specific variables*/
-	Model(GLuint shaderProgram_, glm::vec3 position_ = glm::vec3(), 
-		float angle_ = 0.0f, glm::vec3 rotation_ = glm::vec3(0.0f,1.0f,0.0f), 
-		glm::vec3 scale_ = glm::vec3(1.0f));
+	Model(const std::string& objPath_, const std::string& matPath, GLuint shaderProgram_);
 
 	//!Model Destructor
 	/*!Loops through the meshes vector and deletes all the pointers*/
@@ -27,68 +26,45 @@ public:
 	/*!Adds a mesh to the vector of meshes*/
 	void AddMesh(Mesh* mesh_);
 
-	//!GetPosition Getter
-	/*!Returns this models location*/
-	glm::vec3 GetPosition() const;
+	//!CreateInstance Function
+	/*!Creates a instance of this model and add's it to the modelinstances*/
+	unsigned int CreateInstance(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
 
-	//!GetAngle Getter
-	/*!Returns this models angle*/
-	float GetAngle() const;
+	//!UpdateInstance Function
+	/*!Updates a instance of this model with a given index*/
+	void UpdateInstance(unsigned int index, glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_);
 
-	//!GetRotation Getter
-	/*!Returns this models rotation*/
-	glm::vec3 GetRotation() const;
-
-	//!GetScale Getter
-	/*!Returns this models scale*/
-	glm::vec3 GetScale() const;
-
-	//!SetPosition Setter
-	/*!Sets this models position*/
-	void SetPosition(glm::vec3 positiom_);
-
-	//!SetAngle Setter
-	/*!Sets this models angle*/
-	void SetAngle(float angle_);
-
-	//!SetRotation Setter
-	/*!Sets this models rotation*/
-	void SetRotation(glm::vec3 rotation_);
-
-	//!SetScale Setter
-	/*!Sets this models scale*/
-	void SetScale(glm::vec3 scale_);
-
+	//!GetTransform getter
+	/*!Returns our models transform matrix*/
+	glm::mat4 GetTransform(unsigned int index_) const;
 
 private:
+
+	//!CreateTransform Function
+	/*!Create's a transform when given the parameters*/
+	glm::mat4 CreateTransform(glm::vec3 position_, float angle_, glm::vec3 rotation_, glm::vec3 scale_) const;
+
+	//!LoadModel Function
+	/*!Updates the meshes vector with the object loaders sub mesh*/
+	void LoadModel();
 
 	//! std::vector meshes
 	/*!Holds all of the meshes that this model contains*/
 	std::vector<Mesh*> meshes;
 
+	//!ModelInstances vector
+	/*!Stores all the instances of this model*/
+	std::vector<glm::mat4> modelInstances;
+
 	//! Shader Program Unsigned Integer
 	/*!Contains the shader that this model uses*/
 	GLuint shaderProgram;
 
-	//!Position vector3
-	/*!Holds our models position*/
-	glm::vec3 position;
+	//!OBJLoader pointer
+	/*!Allows us to load in models from obj files*/
+	OBJLoader* objLoader;
 
-	//!Angle float
-	/*!Holds our models angle*/
-	float angle;
 
-	//!Rotation vector3
-	/*!Holds our models rotation*/
-	glm::vec3 rotation;
-
-	//!Scale vector3
-	/*!Holds our models scale*/
-	glm::vec3 scale;
-
-	//!GetTransform getter
-	/*!Returns our models transform matrix*/
-	glm::mat4 GetTransform() const;
 
 };
 #endif

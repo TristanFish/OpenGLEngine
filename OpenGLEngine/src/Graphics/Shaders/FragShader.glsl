@@ -16,6 +16,7 @@ struct Light
 
 uniform sampler2D meshTexture;
 uniform vec3 viewPosition;
+uniform int lightsInGame;
 uniform Light light[2];
 
 out vec4 fColour;
@@ -43,7 +44,7 @@ vec3 GeneratePhong(Light light_)
 void main()
 {
 	vec3 finalColor;
-	for(int i = 0; i < 2; i++)
+	for(int i = 0; i < lightsInGame; i++)
 	{
 		finalColor += GeneratePhong(light[i]);
 	}
