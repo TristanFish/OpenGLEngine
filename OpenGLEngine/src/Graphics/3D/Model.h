@@ -38,6 +38,11 @@ public:
 	/*!Returns our models transform matrix*/
 	glm::mat4 GetTransform(unsigned int index_) const;
 
+
+	//!GetShaderProgram Getter
+	/*!Returns the shader program the model is using*/
+	GLuint GetShaderProgram() const;
+
 private:
 
 	//!CreateTransform Function
@@ -63,8 +68,5 @@ private:
 	//!OBJLoader pointer
 	/*!Allows us to load in models from obj files*/
 	OBJLoader* objLoader;
-
-
-
 };
 #endif

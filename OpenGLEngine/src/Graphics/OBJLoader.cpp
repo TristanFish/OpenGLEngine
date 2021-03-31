@@ -2,7 +2,7 @@
 
 OBJLoader::OBJLoader() : vertices(std::vector<glm::vec3>()), normals(std::vector<glm::vec3>()), textureCoords(std::vector<glm::vec2>()),
 indices(std::vector<unsigned int>()), normalIndices(std::vector<unsigned int>()), textureIndices(std::vector<unsigned int>()),
-meshVerticies(std::vector<Vertex>()), subMeshes(std::vector<SubMesh>()), currentTexture(0)
+meshVerticies(std::vector<Vertex>()), subMeshes(std::vector<SubMesh>()), currentMaterial(Material())
 {
 	vertices.reserve(200);
 	normals.reserve(200);
@@ -45,7 +45,7 @@ void OBJLoader::PostProcessing()
 	SubMesh mesh;
 	mesh.vertexList = meshVerticies;
 	mesh.meshIndices = indices;
-	mesh.textureID = currentTexture;
+	mesh.material = currentMaterial;
 
 	subMeshes.push_back(mesh);
 
@@ -54,8 +54,7 @@ void OBJLoader::PostProcessing()
 	textureIndices.clear();
 	meshVerticies.clear();
 
-	currentTexture = 0;
-
+	currentMaterial = Material();
 }
 
 void OBJLoader::LoadModel(const std::string& objFilePath_, const std::string& mtlFilePath_)
@@ -99,9 +98,6 @@ void OBJLoader::LoadModel(const std::string& filePath_)
 		else if (line.substr(0, 2) == "f ") {
 
 			std::stringstream f_1(line.substr(2));
-
-			
-
 			char slash;			
 
 			std::vector<unsigned int> pos = std::vector<unsigned int>(3);
@@ -119,7 +115,6 @@ void OBJLoader::LoadModel(const std::string& filePath_)
 				textureIndices.push_back(texCoord[i] - 1);
 				normalIndices.push_back(norm[i] - 1);
 			}
-
 		}
 
 
@@ -138,28 +133,13 @@ void OBJLoader::LoadModel(const std::string& filePath_)
 
 void OBJLoader::LoadMaterial(const std::string& matName_)
 {
-	currentTexture = TextureHandler::GetInstance()->GetTexture(matName_);
-	if (currentTexture == 0)
-	{
-		TextureHandler::GetInstance()->CreateTexture(matName_, "Resources/Textures/" + matName_ + ".png");
-		currentTexture = TextureHandler::GetInstance()->GetTexture(matName_);
-	}
+	currentMaterial = MaterialHandler::GetInstance()->GetMaterial(matName_);
+	
 }
 
 void OBJLoader::LoadMaterialLibrary(const std::string& matFilePath_)
 {
-	std::ifstream in(matFilePath_.c_str(), std::ios::in);
-	if (!in)
-	{
-		Debug::Error("Cannot open MTL file" + matFilePath_, "OBJLoader.cpp", __LINE__);
-	}
-	std::string line;
-
-	while (std::getline(in, line)) {
-		if (line.substr(0, 7) == "newmtl ") {
-			LoadMaterial(line.substr(7));
-		}
-	}
+	MTLoader::LoadMaterial(matFilePath_);
 
 }
 

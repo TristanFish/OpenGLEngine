@@ -9,6 +9,8 @@
 #include "Graphics/3D/GameObject.h"
 #include "Graphics/ShaderHandler.h"
 #include "Graphics/TextureHandler.h"
+#include "Graphics/MaterialHandler.h"
+#include "SceneGraph.h"
 #include "Camera.h"
 #include <memory>
 
@@ -127,6 +129,8 @@ private:
 	/*!The scene number that our engine is currently on*/
 	unsigned int currentSceneNum;
 
+	//!Camera Pointer
+	/*!Hold's a instance of a camera in our engine*/
 	Camera* camera;
 };
 #endif

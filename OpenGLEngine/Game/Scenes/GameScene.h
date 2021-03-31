@@ -31,30 +31,6 @@ public:
 	void Render() override;
 
 private:
-
-	//!InitilizeSquareMesh Function
-	/*!Creates a list of vertices for a square and then returns the vertices as a mesh*/
-	Mesh* InitilizeSquareMesh(const float size_, const GLuint textureID_, const GLuint shaderProgram_);
-
-	//!InitilizeTriangleMesh Function
-	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
-	Mesh* InitilizeTriangleMesh(const float size_, const GLuint textureID_, const GLuint shaderProgram_);
-
-	//!InitilizeTriangleMesh Function
-	/*!Creates a list of vertices for a triangle and then returns the vertices as a mesh*/
-	Mesh* InitilizeCubeMesh(const GLuint textureID_, const GLuint shaderProgram_);
-
-	//!InitilizeModel Function
-	/*!Initializes the model that the square GameObject will use*/
-	void InitilizeModel();
-
-	//!Square GameObject pointer
-	/*!Handle's how the square gameobject will be rendered*/
-	GameObject* square;
-
-	//!Model pointer
-	/*!*/
-	Model* model;
 };
 
 #endif

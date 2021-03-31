@@ -5,6 +5,7 @@
 #include <iostream>
 #include "3D/Mesh.h"
 #include "TextureHandler.h"
+#include "FX/MTLoader.h"
 
 //! OBJLoader Class
 /*!Load's in obj files for use in our engine*/
@@ -71,11 +72,9 @@ private:
 	/*!Hold's all of the Sub Meshes for each mesh*/
 	std::vector<SubMesh> subMeshes;
 
-	//!CurrentTexture Gluint
-	/*!Hold's the current texture being used by the loaded mesh*/
-	GLuint currentTexture;
-
-
+	//!currentMaterial Gluint
+	/*!Hold's the current material being used by the loaded mesh*/
+	Material currentMaterial;
 
 };
 

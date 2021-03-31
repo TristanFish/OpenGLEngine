@@ -44,6 +44,8 @@ public:
 	/*!Returns this gameobjects scale*/
 	glm::vec3 GetScale() const;
 
+	std::string GetName() const;
+
 	//!SetPosition Setter
 	/*!Sets this gameobjects position*/
 	void SetPosition(glm::vec3 positiom_);
@@ -59,6 +61,10 @@ public:
 	//!SetScale Setter
 	/*!Sets this gameobjects scale*/
 	void SetScale(glm::vec3 scale_);
+
+	//!SetName Setter
+	/*!Sets this gameobjects name*/
+	void SetName(std::string name_);
 
 private:
 
@@ -87,6 +93,10 @@ private:
 	//!Model Pointer
 	/*!Holds a pointer too the model the gameobject uses*/
 	Model* model;
+
+	//!Name string
+	/*!Hold's the gameobjects name*/
+	std::string name;
 };
 
 #endif;

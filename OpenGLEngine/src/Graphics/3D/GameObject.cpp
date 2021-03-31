@@ -25,9 +25,6 @@ scale(glm::vec3(1.0f)), angle(0), modelInstance(0)
 
 GameObject::~GameObject()
 {
-	if (model) {
-		delete model;
-	}
 	model = nullptr;
 }
 
@@ -65,6 +62,11 @@ glm::vec3 GameObject::GetScale() const
 	return scale;
 }
 
+std::string GameObject::GetName() const
+{
+	return name;
+}
+
 void GameObject::SetPosition(glm::vec3 positiom_)
 {
 	position = positiom_;
@@ -90,6 +92,11 @@ void GameObject::SetScale(glm::vec3 scale_)
 {
 	scale = scale_;
 	UpdateModelInstance();
+}
+
+void GameObject::SetName(std::string name_)
+{
+	name = name_;
 }
 
 void GameObject::UpdateModelInstance() const

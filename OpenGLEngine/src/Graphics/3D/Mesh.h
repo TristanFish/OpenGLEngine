@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "Core/Camera.h"
+#include "Graphics/MaterialHandler.h"
 class CoreEngine;
 
 //!Vertex Struct
@@ -16,8 +17,6 @@ struct Vertex
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec2 textureCoordinates;
-	glm::vec3 colour;
-
 };
 
 
@@ -26,7 +25,7 @@ struct Vertex
 struct SubMesh {
 	std::vector<Vertex> vertexList;
 	std::vector<unsigned int> meshIndices;
-	GLuint textureID;
+	Material material;
 
 };
 
@@ -71,7 +70,11 @@ private:
 
 	//!GLuint Model, Vie, Projection Locations
 	/*!Stores the locations of our different matricies needed to render this mesh*/
-	GLuint modelLoc, viewLoc, projectionLoc, textureLoc;
+	GLuint modelLoc, viewLoc, projectionLoc;
+
+	//!Material Locations
+	/*!Store's the locations of all the needed information for material's*/
+	GLuint matDiffuseMap, matShine, matTrans, matAmb, matDiff,matSpec;
 	
 
 	//!GLuint Position, LightPosition, LightAmbient, LightSpecular, LightDiffuse and LightColour locations

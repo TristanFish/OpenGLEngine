@@ -2,7 +2,8 @@
 #include "Core/CoreEngine.h"
 
 Mesh::Mesh(SubMesh& subMesh_, GLuint shaderProgram_) : VAO(0), VBO(0),
-shaderProgram(0), viewLoc(0), projectionLoc(0),textureLoc(0)
+shaderProgram(0), viewLoc(0), projectionLoc(0), matDiffuseMap(0), matShine(0), matTrans(0), 
+matAmb(0), matDiff(0), matSpec(0)
 {
 	subMesh = subMesh_;
 	shaderProgram = shaderProgram_;
@@ -26,10 +27,16 @@ Mesh::~Mesh()
 
 void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_)
 {
-	glUniform1i(textureLoc, 0);
+	glUniform1i(matDiffuseMap, 0);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, subMesh.textureID);
+	glBindTexture(GL_TEXTURE_2D, subMesh.material.diffuseMap);
 
+	glUniform1f(matShine, subMesh.material.shininess);
+	glUniform1f(matTrans, subMesh.material.transparency);
+
+	glUniform3fv(matAmb, 1 , glm::value_ptr(subMesh.material.ambient));
+	glUniform3fv(matDiff, 1, glm::value_ptr(subMesh.material.diffuse));
+	glUniform3fv(matSpec, 1, glm::value_ptr(subMesh.material.specular));
 
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetView()));
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera_->GetPerspective()));
@@ -57,8 +64,6 @@ void Mesh::Render(Camera* camera_, std::vector<glm::mat4>& instances_)
 
 		lightSpecLoc = glGetUniformLocation(shaderProgram, (index + ".specular").c_str());
 		glUniform1f(lightSpecLoc, CoreEngine::GetInstance()->GetCamera()->GetLightSources()[i]->GetSpecular());
-
-		
 	}
 
 	
@@ -101,9 +106,6 @@ void Mesh::GenerateBuffers()
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, textureCoordinates));
 
-	//Colour
-	glEnableVertexAttribArray(3);
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, colour));
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -111,7 +113,14 @@ void Mesh::GenerateBuffers()
 	modelLoc = glGetUniformLocation(shaderProgram, "model");
 	viewLoc = glGetUniformLocation(shaderProgram, "view");
 	projectionLoc = glGetUniformLocation(shaderProgram, "projection");
-	textureLoc = glGetUniformLocation(shaderProgram, "meshTexture");
+
+	matDiffuseMap = glGetUniformLocation(shaderProgram, "meshMat.diffuseMap");
+	matShine = glGetUniformLocation(shaderProgram, "meshMat.shininess");
+	matTrans = glGetUniformLocation(shaderProgram, "meshMat.transparency");
+	matAmb = glGetUniformLocation(shaderProgram, "meshMat.ambient");
+	matDiff = glGetUniformLocation(shaderProgram, "meshMat.diffuse");
+	matSpec = glGetUniformLocation(shaderProgram, "meshMat.specular");
+
 
 	posLoc = glGetUniformLocation(shaderProgram, "viewPosition");
 	

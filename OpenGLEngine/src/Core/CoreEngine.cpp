@@ -142,7 +142,8 @@ void CoreEngine::OnDestroy()
 {
 	TextureHandler::GetInstance()->OnDestroy();
 	ShaderHandler::GetInstance()->OnDestroy();
-
+	SceneGraph::GetInstance()->OnDestroy();
+	MaterialHandler::GetInstance()->OnDestroy();
 	delete timer;
 	timer = nullptr;
 
