@@ -10,11 +10,7 @@ class GameObject
 public:
 	//!GameObject Constructor
 	/*!Initializes the classes variables */
-	GameObject(Model* model_);
-
-	//!GameObject Constructor
-	/*!Initializes the classes variables */
-	GameObject(Model* model_, glm::vec3 position_);
+	GameObject(Model* model_, glm::vec3 position_ = glm::vec3(0));
 
 	//!GameObject Destructor
 	/*!Deletes any pointers this class uses*/
@@ -66,6 +62,11 @@ public:
 	/*!Sets this gameobjects name*/
 	void SetName(std::string name_);
 
+
+	//!GetBoundingBox Getter 
+	/*!Return's this gameobjects bounding box*/
+	BoundingBox GetBoundingBox() const;
+
 private:
 
 	void UpdateModelInstance() const;
@@ -97,6 +98,11 @@ private:
 	//!Name string
 	/*!Hold's the gameobjects name*/
 	std::string name;
+
+
+	//!BoundingBox  
+	/*!Hold's this gameobjects bounding box*/
+	BoundingBox boundingBox;
 };
 
 #endif;

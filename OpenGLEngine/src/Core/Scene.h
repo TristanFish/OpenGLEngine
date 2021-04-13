@@ -4,6 +4,10 @@
 //!Abstract Scene Class
 /*!Hold's all of the needed functions for a scene to be created*/
 class Scene {
+
+
+	int test;
+
 public:
 	
 	//!Class Constructor

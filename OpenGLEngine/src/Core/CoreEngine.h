@@ -2,14 +2,20 @@
 #define COREENGINE_H
 
 #include "Graphics/Window.h"
+
 #include "Tools/Debug.h"
 #include "Tools/GameInterface.h"
+
 #include "Timer.h"
 #include "Scene.h"
+
+#include "Events/EventListener.h"
+
 #include "Graphics/3D/GameObject.h"
 #include "Graphics/ShaderHandler.h"
 #include "Graphics/TextureHandler.h"
 #include "Graphics/MaterialHandler.h"
+
 #include "SceneGraph.h"
 #include "Camera.h"
 #include <memory>
@@ -74,6 +80,23 @@ public:
 	//!GetCamera Setter
 	/*!Set's the camera to the Camera* parameter*/
 	void SetCamera(Camera* camera_);
+
+	//!NotifyOfMousePressed Function
+	/*!Notifies the MouseEventListener On Mouse Pressed*/
+	 void NotifyOfMousePressed(glm::ivec2 mouse_,int buttonType_);
+
+	 //!NotifyOfMouseReleased Function
+	/*!Notifies the MouseEventListener On Mouse Released*/
+	 void NotifyOfMouseReleased(glm::ivec2 mouse_,int buttonType_);
+
+	 //!NotifyOfMouseMove Function
+	/*!Notifies the camera On Mouse Moved*/
+	 void NotifyOfMouseMove(glm::ivec2 mouse_);
+
+	 //!NotifyOfMouseScroll Function
+	/*!Notifies the camera On Mouse scroll*/
+	 void NotifyOfMouseScroll(int y_);
+
 
 private:
 

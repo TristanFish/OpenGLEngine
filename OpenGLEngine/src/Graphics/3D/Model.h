@@ -43,6 +43,8 @@ public:
 	/*!Returns the shader program the model is using*/
 	GLuint GetShaderProgram() const;
 
+	BoundingBox GetBoundingBox() const;
+
 private:
 
 	//!CreateTransform Function
@@ -68,5 +70,10 @@ private:
 	//!OBJLoader pointer
 	/*!Allows us to load in models from obj files*/
 	OBJLoader* objLoader;
+
+
+	//!BoundingBox 
+	/*!Hold's a bounding box object for our model*/
+	BoundingBox boundingBox;
 };
 #endif

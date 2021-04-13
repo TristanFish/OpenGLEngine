@@ -79,6 +79,17 @@ void OBJLoader::LoadModel(const std::string& filePath_)
 			std::stringstream v(line.substr(2));
 			float x, y, z;
 			v >> x >> y >> z;
+
+			boundingBox.minVert = glm::vec3(
+				std::min(boundingBox.minVert.x, x), 
+				std::min(boundingBox.minVert.y, y), 
+				std::min(boundingBox.minVert.z, z));
+
+			boundingBox.maxVert = glm::vec3(
+				std::max(boundingBox.maxVert.x, x),
+				std::max(boundingBox.maxVert.y, y),
+				std::max(boundingBox.maxVert.z, z));
+
 			vertices.push_back(glm::vec3(x, y, z));
 		}
 		else if (line.substr(0, 2) == "vn") {
@@ -146,4 +157,9 @@ void OBJLoader::LoadMaterialLibrary(const std::string& matFilePath_)
 std::vector<SubMesh> OBJLoader::GetSubMeshes()
 {
 	return subMeshes;
+}
+
+BoundingBox OBJLoader::GetBoundingBox() const
+{
+	return boundingBox;
 }

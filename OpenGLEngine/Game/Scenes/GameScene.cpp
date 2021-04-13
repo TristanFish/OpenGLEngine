@@ -36,6 +36,9 @@ bool GameScene::OnCreate()
 void GameScene::Update(const float deltaTime_)
 {
 	SceneGraph::GetInstance()->Update(deltaTime_);
+
+	CoreEngine::GetInstance()->GetCamera()->ObjectInFrustum(*SceneGraph::GetInstance()->GetGameObject("Apple"));
+
 }
 
 void GameScene::Render()

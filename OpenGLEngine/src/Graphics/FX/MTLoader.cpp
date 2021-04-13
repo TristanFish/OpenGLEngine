@@ -51,19 +51,17 @@ void MTLoader::LoadMaterial(std::string filePath_)
 			std::stringstream f_1(line.substr(4));
 			f_1 >> m.transparency;
 		}
-		if (line.substr(0, 4) == "\tNi ") {
+		if (line.substr(0, 4) == "\tNs ") {
 
 			std::stringstream f_1(line.substr(4));
 			f_1 >> m.shininess;
 		}
-
-
-		// LOAD REST OF MATERIAL DATA
 	}
 
 	if (m.diffuseMap != 0) {
 		MaterialHandler::GetInstance()->AddMaterial(m);
 	}
+
 	in.close();
 }
 

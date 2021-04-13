@@ -1,5 +1,5 @@
 #include "Camera.h"
-
+#include "Graphics/3D/GameObject.h"
 #include "Core/CoreEngine.h"
 
 Camera::Camera() : position(glm::vec3()), perspective(glm::mat4()), orthographic(glm::mat4()), view(glm::mat4()),
@@ -14,6 +14,8 @@ right(glm::vec3()), worldUp(glm::vec3())
 	farPlane = 50.0f;
 	yaw = -90.0f;
 	pitch = 0.0f;
+
+	
 
 	perspective = glm::perspective(fieldOfView, CoreEngine::GetInstance()->GetScreenWidth() / CoreEngine::GetInstance()->GetScreenHeight(), nearPlane, farPlane);
 
@@ -78,6 +80,41 @@ std::vector<LightSource*> Camera::GetLightSources() const
 	return lightSources;
 }
 
+void Camera::ProcessMouseMovement(glm::vec2 offset_)
+{
+	offset_ *= 0.05f;
+
+	yaw += offset_.x;
+	pitch += offset_.y;
+	
+	if (pitch > 89.0f) {
+		pitch = 89.0f;
+	}
+	if (pitch < -89.0f) {
+		pitch = -89.0f;
+	}
+	//glm::clamp(pitch, -89.0f, 89.0f);
+
+	if (yaw < 0.0f) {
+		yaw += 360.0f;
+	}
+	if (yaw > 360.0f) {
+		yaw -= 360.0f;
+	}
+	//glm::clamp(yaw, 0.0f, 360.0f);
+
+
+	UpdateCameraVectors();
+}
+
+void Camera::ProcessMouseZoom(int y_)
+{
+	if (y_ < 0 || y_ > 0) {
+		position += static_cast<float>(y_) * (forward * 2.0f);
+	}
+	UpdateCameraVectors();
+}
+
 void Camera::UpdateCameraVectors()
 {
 	forward.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -91,5 +128,56 @@ void Camera::UpdateCameraVectors()
 	up = glm::normalize(glm::cross(right, forward));
 
 	view = glm::lookAt(position, position + forward, up);
+
+	float tang = (float)tan(ANG2RAD * fieldOfView * 0.5f);
+
+	heightNear = nearPlane * tang;
+	widthNear = heightNear * CoreEngine::GetInstance()->GetScreenWidth() / CoreEngine::GetInstance()->GetScreenHeight();
+
+	heightFar = farPlane * tang;
+	heightFar = heightFar * CoreEngine::GetInstance()->GetScreenWidth() / CoreEngine::GetInstance()->GetScreenHeight();
+	
+
+	CalulateFrustrum();
+}
+
+void Camera::ObjectInFrustum(const GameObject& object_)
+{
+	int Result = 0;
+
+	for (int i = 0; i < 6; i++) {
+
+		glm::vec3 objPos = object_.GetPosition();
+		 if (planes[i].Distance(objPos) < 0.0f) {
+			std::cout << i << " Can't See An Object: " << object_.GetName() <<  std::endl;
+
+		}
+	}
+}
+
+void Camera::CalulateFrustrum()
+{
+	
+	farCentre = position + forward * farPlane;
+	nearCentre = position + forward * nearPlane;
+
+	nearTL = nearCentre + (up * (heightNear )) - (right * (widthNear));
+	nearTR = nearCentre + (up * (heightNear)) + (right * (widthNear ));
+	nearBL = nearCentre - (up * (heightNear)) - (right * (widthNear));
+	nearBR = nearCentre - (up * (heightNear) + (right * (widthNear)));
+
+	farTL = farCentre + (up * (heightFar)) - (right * (widthFar));
+	farTR = farCentre + (up * (heightFar)) + (right * (widthFar));
+	farBL = farCentre + (up * (heightFar)) - (right * (widthFar));
+	farBR = farCentre + (up * (heightFar)) + (right * (widthFar));
+
+
+	planes[TOP].CreateFromPoints(nearTR, nearTL, farTL);
+	planes[BOTTOM].CreateFromPoints(nearBL, nearBR, farBR);
+	planes[LEFT].CreateFromPoints(nearTL, nearBL, farBL);
+	planes[RIGHT].CreateFromPoints(nearBL, nearTR, farBR);
+	planes[NEARP].CreateFromPoints(nearTL, nearTR, nearBR);
+	planes[FARP].CreateFromPoints(farTR, farTL, farBL);
+
 
 }

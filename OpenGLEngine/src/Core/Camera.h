@@ -4,8 +4,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Graphics/FX/LightSource.h"
+#include "Math/Plane.h"
 #include <vector>
 
+#define ANG2RAD 3.14159265358979323846/180.0
+
+class GameObject;
 //!Camera Class
 /*!Control's how our camera works in our engine*/
 class Camera
@@ -52,11 +56,27 @@ public:
 	/*!Returns a vector of light sources in our scene*/
 	std::vector<LightSource*> GetLightSources() const;
 
+	void ObjectInFrustum(const GameObject& object_);
+
+
+	void ProcessMouseMovement(glm::vec2 offset_);
+	void ProcessMouseZoom(int y_);
 private:
+
+	enum {
+
+		TOP = 0,
+		BOTTOM,
+		LEFT,
+		RIGHT,
+		NEARP,
+		FARP
+	};
 
 	//!UpdateCameraVectors Function
 	/*!Updates all of the cameras directional vectors*/
 	void UpdateCameraVectors();
+	void CalulateFrustrum();
 
 	//!Position vector3
 	/*!Stores this cameras position*/
@@ -83,9 +103,20 @@ private:
 	glm::vec3 forward, up, right, worldUp;
 
 
+	float heightNear, widthNear, heightFar, widthFar;
+
+	Plane planes[6];
+
+	glm::vec3 farCentre, nearCentre;
+
+	glm::vec3 nearTL, nearTR, nearBL, nearBR;
+
+	glm::vec3 farTL, farTR, farBL, farBR;
+
 	//!Vector lightSources 
 	/*!Holds a list of light sources in our scene*/
 	std::vector<LightSource*> lightSources;
+
 
 
 };

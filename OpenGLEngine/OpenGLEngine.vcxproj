@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Events\MouseEventListener.cpp" />
+    <ClCompile Include="src\Events\EventListener.cpp" />
     <ClCompile Include="src\Graphics\FX\MTLoader.cpp" />
     <ClCompile Include="src\Graphics\MaterialHandler.cpp" />
     <ClCompile Include="src\Core\SceneGraph.cpp" />
@@ -40,6 +42,8 @@
     <ClCompile Include="src\Graphics\TextureHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Events\MouseEventListener.h" />
+    <ClInclude Include="src\Events\EventListener.h" />
     <ClInclude Include="src\Graphics\FX\MTLoader.h" />
     <ClInclude Include="src\Graphics\MaterialHandler.h" />
     <ClInclude Include="src\Core\SceneGraph.h" />
@@ -52,6 +56,8 @@
     <ClInclude Include="src\Graphics\3D\GameObject.h" />
     <ClInclude Include="Game\Scenes\GameScene.h" />
     <ClInclude Include="src\Core\Scene.h" />
+    <ClInclude Include="src\Math\BoundingBox.h" />
+    <ClInclude Include="src\Math\Plane.h" />
     <ClInclude Include="src\Tools\GameInterface.h" />
     <ClInclude Include="src\Tools\Debug.h" />
     <ClInclude Include="src\Core\CoreEngine.h" />

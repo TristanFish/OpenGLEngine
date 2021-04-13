@@ -6,7 +6,7 @@
 #include "3D/Mesh.h"
 #include "TextureHandler.h"
 #include "FX/MTLoader.h"
-
+#include "Math/BoundingBox.h"
 //! OBJLoader Class
 /*!Load's in obj files for use in our engine*/
 class OBJLoader
@@ -28,6 +28,8 @@ public:
 	//!GetSubMeshes Getter
 	/*!Return's the vector of submeshes*/
 	std::vector<SubMesh> GetSubMeshes();
+
+	BoundingBox GetBoundingBox() const;
 
 private:
 
@@ -76,6 +78,9 @@ private:
 	/*!Hold's the current material being used by the loaded mesh*/
 	Material currentMaterial;
 
+	//!BoundingBox 
+	/*!Hold's a bounding box object for our OBJLoader to use and pass on to loaded objects*/
+	BoundingBox boundingBox;
 };
 
 #endif

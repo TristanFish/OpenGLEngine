@@ -33,6 +33,10 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		return isRunning = false;
 	}
 
+	SDL_WarpMouseInWindow(window->GetWindow(), window->GetWidth() / 2, window->GetHeight() / 2);
+
+	MouseEventListener::RegisterEngineObject(this);
+
 	ShaderHandler::GetInstance()->CreateProgram("colourShader", 
 		"src/Graphics/Shaders/ColourVertShader.glsl", 
 		"src/Graphics/Shaders/ColourFragShader.glsl");
@@ -63,6 +67,7 @@ void CoreEngine::Run()
 	while (isRunning)
 	{
 		timer->UpdateFrameTricks();
+		EventListener::Update();
 		Update(timer->GetDeltaTime());
 		Render();
 		SDL_Delay(timer->GetSleepTime(fps));
@@ -116,12 +121,37 @@ void CoreEngine::SetCamera(Camera* camera_)
 	camera = camera_;
 }
 
+void CoreEngine::NotifyOfMousePressed(glm::ivec2 mouse_, int buttonType_)
+{
+
+}
+
+void CoreEngine::NotifyOfMouseReleased(glm::ivec2 mouse_, int buttonType_)
+{
+
+}
+
+void CoreEngine::NotifyOfMouseMove(glm::ivec2 mouse_)
+{
+	if (camera)
+	{
+		camera->ProcessMouseMovement(MouseEventListener::GetMouseOffset());
+	}
+}
+
+void CoreEngine::NotifyOfMouseScroll(int y_)
+{
+	if (camera)
+	{
+		camera->ProcessMouseZoom(y_);
+	}
+}
+
 void CoreEngine::Update(const float deltatime_)
 {
 	if (gameInterface)
 	{
 		gameInterface->Update(deltatime_);
-		//Debug::Trace("DeltaTime: " + std::to_string(deltatime_), "CoreEngine.cpp", __LINE__);
 
 	}
 }

@@ -1,4 +1,4 @@
 [INFO]: OpenGL Version: 7938 in: Window.cpp on line: 47
 [INFO]: Start Scene Has Been Created in: StartScene.cpp on line: 15
-[INFO]: Engine Has Been Successfully Created  in: CoreEngine.cpp on line: 55
+[INFO]: Engine Has Been Successfully Created  in: CoreEngine.cpp on line: 59
 [INFO]: Game Scene Has Been Created in: GameScene.cpp on line: 14
