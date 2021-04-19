@@ -115,6 +115,16 @@ void Camera::ProcessMouseZoom(int y_)
 	UpdateCameraVectors();
 }
 
+float Camera::GetNearPlane() const
+{
+	return nearPlane;
+}
+
+float Camera::GetFarPlane() const
+{
+	return farPlane;
+}
+
 void Camera::UpdateCameraVectors()
 {
 	forward.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -131,12 +141,6 @@ void Camera::UpdateCameraVectors()
 
 	float tang = (float)tan(ANG2RAD * fieldOfView * 0.5f);
 
-	heightNear = nearPlane * tang;
-	widthNear = heightNear * CoreEngine::GetInstance()->GetScreenWidth() / CoreEngine::GetInstance()->GetScreenHeight();
-
-	heightFar = farPlane * tang;
-	heightFar = heightFar * CoreEngine::GetInstance()->GetScreenWidth() / CoreEngine::GetInstance()->GetScreenHeight();
-	
 
 	CalulateFrustrum();
 }
@@ -148,36 +152,27 @@ void Camera::ObjectInFrustum(const GameObject& object_)
 	for (int i = 0; i < 6; i++) {
 
 		glm::vec3 objPos = object_.GetPosition();
-		 if (planes[i].Distance(objPos) < 0.0f) {
-			std::cout << i << " Can't See An Object: " << object_.GetName() <<  std::endl;
-
+		 if (!planes[i].OBBIntersection(object_.GetBoundingBox())) {
+			std::cout << " Can't See An Object: " << object_.GetName() <<  std::endl;
 		}
 	}
 }
 
 void Camera::CalulateFrustrum()
 {
-	
-	farCentre = position + forward * farPlane;
-	nearCentre = position + forward * nearPlane;
 
-	nearTL = nearCentre + (up * (heightNear )) - (right * (widthNear));
-	nearTR = nearCentre + (up * (heightNear)) + (right * (widthNear ));
-	nearBL = nearCentre - (up * (heightNear)) - (right * (widthNear));
-	nearBR = nearCentre - (up * (heightNear) + (right * (widthNear)));
+	glm::mat4 PVM = perspective * view;
 
-	farTL = farCentre + (up * (heightFar)) - (right * (widthFar));
-	farTR = farCentre + (up * (heightFar)) + (right * (widthFar));
-	farBL = farCentre + (up * (heightFar)) - (right * (widthFar));
-	farBR = farCentre + (up * (heightFar)) + (right * (widthFar));
+	planes[TOP].UpdatePlane(PVM[3].x - PVM[1].x, PVM[3].y - PVM[1].y, PVM[3].z - PVM[1].z, PVM[3].w - PVM[1].w);
 
+	planes[BOTTOM].UpdatePlane(PVM[3].x + PVM[1].x, PVM[3].y + PVM[1].y, PVM[3].z + PVM[1].z, PVM[3].w + PVM[1].w);
 
-	planes[TOP].CreateFromPoints(nearTR, nearTL, farTL);
-	planes[BOTTOM].CreateFromPoints(nearBL, nearBR, farBR);
-	planes[LEFT].CreateFromPoints(nearTL, nearBL, farBL);
-	planes[RIGHT].CreateFromPoints(nearBL, nearTR, farBR);
-	planes[NEARP].CreateFromPoints(nearTL, nearTR, nearBR);
-	planes[FARP].CreateFromPoints(farTR, farTL, farBL);
+	planes[LEFT].UpdatePlane(PVM[3].x + PVM[0].x, PVM[3].y + PVM[0].y, PVM[3].z + PVM[0].z, PVM[3].w + PVM[0].w);
 
+	planes[RIGHT].UpdatePlane(PVM[3].x - PVM[0].x, PVM[3].y - PVM[0].y, PVM[3].z - PVM[0].z, PVM[3].w - PVM[0].w);
+
+	planes[NEARP].UpdatePlane(PVM[3].x + PVM[2].x, PVM[3].y + PVM[2].y, PVM[3].z + PVM[2].z, PVM[3].w + PVM[2].w);
+
+	planes[FARP].UpdatePlane(PVM[3].x - PVM[2].x, PVM[3].y - PVM[2].y, PVM[3].z - PVM[2].z, PVM[3].w - PVM[2].w);
 
 }

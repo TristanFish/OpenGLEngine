@@ -1,6 +1,11 @@
 #include "EventListener.h"
 #include "Core/CoreEngine.h"
 
+EventListener::~EventListener()
+{
+
+}
+
 void EventListener::Update()
 {
 	SDL_Event sdlEvent;

@@ -71,7 +71,7 @@ GLuint Model::GetShaderProgram() const
 	return shaderProgram;
 }
 
-BoundingBox Model::GetBoundingBox() const
+BoundingBox& Model::GetBoundingBox() 
 {
 	return boundingBox;
 }

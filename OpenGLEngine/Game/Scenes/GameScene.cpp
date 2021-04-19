@@ -18,6 +18,7 @@ bool GameScene::OnCreate()
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(5.0f, 0.0f, 2.0f), glm::vec3(1.0f, 1.0f, 1.0f), 0.05f, 0.2f, 0.2f));
 	CoreEngine::GetInstance()->GetCamera()->AddLightSource(new LightSource(glm::vec3(-5.0f, 1.0f, 2.0f), glm::vec3(1.0f, 1.0f, 1.0f), 0.05f, 0.2f, 0.2f));
 
+	CollisionHandler::GetInstance()->OnCreate();
 
 	Model* appleModel = new Model("Resources/Models/Apple.obj", "Resources/Materials/Apple.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
 	Model* diceModel = new Model("Resources/Models/Dice.obj", "Resources/Materials/Dice.mtl", ShaderHandler::GetInstance()->GetShader("basicShader"));
@@ -26,6 +27,7 @@ bool GameScene::OnCreate()
 
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(diceModel, glm::vec3(-2.0f, 0.0, -2.0)));
 	SceneGraph::GetInstance()->AddGameObject(new GameObject(appleModel, glm::vec3(1.5f, 0.0, 0.0)),"Apple");
+
 
 	diceModel = nullptr;
 	appleModel = nullptr;

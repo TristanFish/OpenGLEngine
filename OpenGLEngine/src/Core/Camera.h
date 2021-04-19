@@ -61,6 +61,10 @@ public:
 
 	void ProcessMouseMovement(glm::vec2 offset_);
 	void ProcessMouseZoom(int y_);
+
+	float GetNearPlane() const;
+	float GetFarPlane() const;
+
 private:
 
 	enum {
@@ -102,16 +106,9 @@ private:
 	/*!Stores all of the camera's directional vectors*/
 	glm::vec3 forward, up, right, worldUp;
 
-
-	float heightNear, widthNear, heightFar, widthFar;
-
+	//!Planes Array
+	/*!Hold's all of the planes in the camera's frustrum*/
 	Plane planes[6];
-
-	glm::vec3 farCentre, nearCentre;
-
-	glm::vec3 nearTL, nearTR, nearBL, nearBR;
-
-	glm::vec3 farTL, farTR, farBL, farBR;
 
 	//!Vector lightSources 
 	/*!Holds a list of light sources in our scene*/

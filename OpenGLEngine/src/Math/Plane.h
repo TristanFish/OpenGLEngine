@@ -2,6 +2,7 @@
 #define PLANE_H
 
 #include <glm/glm.hpp>
+#include "BoundingBox.h"
 #include <math.h>
 
 struct Plane
@@ -58,13 +59,32 @@ struct Plane
 		return topValue / botValue;
 	}
 
+	inline int OBBIntersection(BoundingBox box)
+	{
+		glm::vec3 centre = (box.maxVert + box.minVert) * 0.5f;
+
+		glm::vec3 extent = box.minVert - centre;
+
+		glm::vec3 oExtent = box.maxVert - centre;
+
+
+		//float r = extent.x * glm::dot(abs(normal.x),extent.y) + extent.y * abs(normal.y) + extent.z * abs(normal.z);
+
+		float r = extent.x * glm::dot(abs(normal.x), oExtent.x) + extent.y * glm::dot(abs(normal.y), oExtent.y) + extent.z * glm::dot(abs(normal.z), oExtent.z);
+
+		float distCentre = glm::dot(normal, centre) - plane.w;
+
+
+		return abs(distCentre) > r;
+	}
+
+
 	inline void CreateFromPoints(const glm::vec3& v0, const glm::vec3& v1, const glm::vec3& v2)
 	{
 		glm::vec3 Normal = glm::normalize(glm::cross(v1 - v0, v2 - v0));
 		normal = Normal;
 		CreateFromNormal(v0, Normal);
 	}
-
 	inline void CreateFromNormal(const glm::vec3& p, const glm::vec3& normal)
 	{
 		
@@ -73,6 +93,13 @@ struct Plane
 		plane.y = NormalizedNormal.y;
 		plane.z = NormalizedNormal.z;
 		plane.w = -glm::dot(p, normal);
+	}
+	inline void UpdatePlane(float x_, float y_, float z_, float w_) {
+
+		plane = glm::vec4(x_, y_, z_, w_);
+
+		normal = glm::vec3(normalize(plane));
+		plane = plane;
 	}
 };
 

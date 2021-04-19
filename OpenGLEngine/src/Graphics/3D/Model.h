@@ -43,7 +43,7 @@ public:
 	/*!Returns the shader program the model is using*/
 	GLuint GetShaderProgram() const;
 
-	BoundingBox GetBoundingBox() const;
+	BoundingBox& GetBoundingBox();
 
 private:
 

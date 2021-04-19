@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Math\CollisionDetection.cpp" />
+    <ClCompile Include="src\Math\CollisionHandler.cpp" />
     <ClCompile Include="src\Events\MouseEventListener.cpp" />
     <ClCompile Include="src\Events\EventListener.cpp" />
     <ClCompile Include="src\Graphics\FX\MTLoader.cpp" />
@@ -42,6 +44,8 @@
     <ClCompile Include="src\Graphics\TextureHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Math\CollisionDetection.h" />
+    <ClInclude Include="src\Math\CollisionHandler.h" />
     <ClInclude Include="src\Events\MouseEventListener.h" />
     <ClInclude Include="src\Events\EventListener.h" />
     <ClInclude Include="src\Graphics\FX\MTLoader.h" />
@@ -58,6 +62,7 @@
     <ClInclude Include="src\Core\Scene.h" />
     <ClInclude Include="src\Math\BoundingBox.h" />
     <ClInclude Include="src\Math\Plane.h" />
+    <ClInclude Include="src\Math\Ray.h" />
     <ClInclude Include="src\Tools\GameInterface.h" />
     <ClInclude Include="src\Tools\Debug.h" />
     <ClInclude Include="src\Core\CoreEngine.h" />

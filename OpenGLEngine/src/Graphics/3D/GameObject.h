@@ -42,6 +42,8 @@ public:
 
 	std::string GetName() const;
 
+	bool GetHit() const;
+
 	//!SetPosition Setter
 	/*!Sets this gameobjects position*/
 	void SetPosition(glm::vec3 positiom_);
@@ -62,9 +64,12 @@ public:
 	/*!Sets this gameobjects name*/
 	void SetName(std::string name_);
 
+	void SetHit(bool hit_, int buttonType_);
 
 	//!GetBoundingBox Getter 
 	/*!Return's this gameobjects bounding box*/
+	BoundingBox& GetBoundingBox();
+
 	BoundingBox GetBoundingBox() const;
 
 private:
@@ -103,6 +108,9 @@ private:
 	//!BoundingBox  
 	/*!Hold's this gameobjects bounding box*/
 	BoundingBox boundingBox;
+
+
+	bool hit;
 };
 
 #endif;
