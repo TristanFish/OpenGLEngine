@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\OctSpatialPartition.cpp" />
     <ClCompile Include="src\Math\CollisionDetection.cpp" />
     <ClCompile Include="src\Math\CollisionHandler.cpp" />
     <ClCompile Include="src\Events\MouseEventListener.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="src\Graphics\TextureHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Core\OctSpatialPartition.h" />
     <ClInclude Include="src\Math\CollisionDetection.h" />
     <ClInclude Include="src\Math\CollisionHandler.h" />
     <ClInclude Include="src\Events\MouseEventListener.h" />

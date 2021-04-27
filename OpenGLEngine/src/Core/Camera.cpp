@@ -152,7 +152,7 @@ void Camera::ObjectInFrustum(const GameObject& object_)
 	for (int i = 0; i < 6; i++) {
 
 		glm::vec3 objPos = object_.GetPosition();
-		 if (!planes[i].OBBIntersection(object_.GetBoundingBox())) {
+		 if (planes[i].Distance(objPos) < 0.0) {
 			std::cout << " Can't See An Object: " << object_.GetName() <<  std::endl;
 		}
 	}

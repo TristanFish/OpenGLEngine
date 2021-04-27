@@ -2,3 +2,4 @@
 [INFO]: Start Scene Has Been Created in: StartScene.cpp on line: 15
 [INFO]: Engine Has Been Successfully Created  in: CoreEngine.cpp on line: 59
 [INFO]: Game Scene Has Been Created in: GameScene.cpp on line: 14
+[INFO]: There are 584 child nodes in: OctSpatialPartition.cpp on line: 141

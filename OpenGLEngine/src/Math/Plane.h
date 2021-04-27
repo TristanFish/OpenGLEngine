@@ -67,13 +67,9 @@ struct Plane
 
 		glm::vec3 oExtent = box.maxVert - centre;
 
-
-		//float r = extent.x * glm::dot(abs(normal.x),extent.y) + extent.y * abs(normal.y) + extent.z * abs(normal.z);
-
-		float r = extent.x * glm::dot(abs(normal.x), oExtent.x) + extent.y * glm::dot(abs(normal.y), oExtent.y) + extent.z * glm::dot(abs(normal.z), oExtent.z);
-
+		float r = extent.x * glm::dot(abs(normal.x),extent.y) + extent.y * abs(normal.y) + extent.z * abs(normal.z);
+	
 		float distCentre = glm::dot(normal, centre) - plane.w;
-
 
 		return abs(distCentre) > r;
 	}

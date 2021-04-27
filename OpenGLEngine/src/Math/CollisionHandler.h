@@ -3,6 +3,7 @@
 
 #include "Ray.h"
 #include "Graphics/3D/GameObject.h"
+#include "Core/OctSpatialPartition.h"
 
 //!CollisionHandler Class
 /*!Handle's all of the collisions that can occour in the game/engine*/
@@ -21,7 +22,7 @@ public:
 
 	//!OnCreate Function
 	/*!Initializes all of the needed variables*/
-	void OnCreate();
+	void OnCreate(float worldSize_);
 
 	//!AddObject Function
 	/*!Add's a gameobject to the list of possible collisions*/
@@ -57,7 +58,7 @@ private:
 
 	//!Colliders Vector
 	/*!Hold's all of the possible gameobjects that can be collided/intersected with*/
-	static std::vector<GameObject*> colliders;
+	static OctSpatialPartition* scenePartition;
 	static std::vector<GameObject*> prevCollisions;
 
 };
